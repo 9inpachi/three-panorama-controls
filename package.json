@@ -1,0 +1,57 @@
+{
+  "name": "three-panorama-controls",
+  "version": "1.0.0",
+  "description": "Panorama controls for three.js.",
+  "author": "Fawad Ali <m.fawaadali98@gmail.com>",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/9inpachi/three-panorama-controls#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/9inpachi/three-panorama-controls.git"
+  },
+  "keywords": [
+    "three.js",
+    "three",
+    "panorama",
+    "controls",
+    "react",
+    "fiber"
+  ],
+  "files": [
+    "dist"
+  ],
+  "bugs": {
+    "url": "https://github.com/9inpachi/three-panorama-controls/issues"
+  },
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    }
+  },
+  "scripts": {
+    "clean": "rm -rf ./dist",
+    "tsc": "tsc",
+    "lint": "eslint .",
+    "prepublishOnly": "pnpm build",
+    "dev": "pnpm clean && tsc --watch",
+    "build": "pnpm clean && pnpm build:cjs && pnpm build:esm && pnpm build:types",
+    "build:cjs": "pnpm tsc --project ./tsconfig.cjs.json --outDir ./dist/cjs/ --declaration false",
+    "build:esm": "pnpm tsc --project ./tsconfig.esm.json --outDir ./dist/esm/ --declaration false",
+    "build:types": "pnpm tsc --emitDeclarationOnly true --declarationDir ./dist/types"
+  },
+  "peerDependencies": {
+    "three": ">= 0.160"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.10.0",
+    "eslint": "^9.10.0",
+    "globals": "^15.9.0",
+    "typescript": "^5.5.4",
+    "typescript-eslint": "^8.4.0"
+  }
+}
