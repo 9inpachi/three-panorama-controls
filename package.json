@@ -1,6 +1,6 @@
 {
   "name": "three-panorama-controls",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "Panorama controls for three.js.",
   "author": "Fawad Ali <m.fawaadali98@gmail.com>",
   "license": "Apache-2.0",
@@ -47,7 +47,8 @@
     "build": "pnpm clean && pnpm build:cjs && pnpm build:esm && pnpm build:types",
     "build:cjs": "pnpm tsc --project ./tsconfig.cjs.json --outDir ./dist/cjs/ --declaration false",
     "build:esm": "pnpm tsc --project ./tsconfig.esm.json --outDir ./dist/esm/ --declaration false",
-    "build:types": "pnpm tsc --emitDeclarationOnly true --declarationDir ./dist/types"
+    "build:types": "pnpm tsc --emitDeclarationOnly true --declarationDir ./dist/types",
+    "release": "release-it"
   },
   "peerDependencies": {
     "@react-three/fiber": ">= 8",
@@ -61,6 +62,7 @@
     "@types/three": "^0.168.0",
     "eslint": "^9.10.0",
     "globals": "^15.9.0",
+    "release-it": "^17.6.0",
     "typescript": "^5.5.4",
     "typescript-eslint": "^8.4.0"
   },

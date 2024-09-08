@@ -1,0 +1,64 @@
+name: publish-package
+
+on:
+  workflow_dispatch:
+    inputs:
+      increment:
+        type: choice
+        description: Version increment (defaults to minor)
+        default: minor
+        options:
+          - major
+          - minor
+          - patch
+          - premajor
+          - preminor
+          - prepatch
+      prerelease:
+        type: choice
+        description: Make the release a beta or alpha prerelease
+        default: "no"
+        options:
+          - "no"
+          - beta
+          - alpha
+
+jobs:
+  publish-package:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: latest
+          run_install: true
+
+      - name: Setup git
+        run: |
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+
+      - name: Build package
+        run: pnpm build
+
+      - name: Publish package
+        if: "${{ inputs.prerelease == 'no' || inputs.prerelease == '' }}"
+        run: pnpm release --increment ${{ inputs.increment }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Prepublish package
+        if: "${{ inputs.prerelease != 'no' && inputs.prerelease != '' }}"
+        run: pnpm release ${{ inputs.increment }} --preRelease ${{ inputs.prerelease }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
