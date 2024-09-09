@@ -27,6 +27,9 @@ jobs:
   publish-package:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write
+
     steps:
       - uses: actions/checkout@v4
 
@@ -40,6 +43,13 @@ jobs:
         with:
           version: latest
           run_install: true
+
+      - name: Setup git
+        run: |
+          # git config user.name "${GITHUB_ACTOR}"
+          # git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          git config user.name "Fawad Ali"
+          git config user.email "m.fawaadali98@gmail.com"
 
       - name: Build package
         run: pnpm build
