@@ -5,6 +5,11 @@
 
 Panorama controls for three.js.
 
+- [Setup](#setup)
+- [Usage](#usage)
+  - [Vanilla](#vanilla)
+  - [React Three Fiber](#react-three-fiber)
+
 ## Setup
 
 Install the package.
@@ -60,6 +65,29 @@ animate();
 ### React Three Fiber
 
 ```jsx
+import React from "react";
+import { createRoot } from "react-dom/client";
+import { BackSide, TextureLoader } from "three";
+import { Canvas, useLoader } from "@react-three/fiber";
 import { PanoramaControls } from "three-panorama-controls/react";
-export const SampleComponent = () => <PanoramaControls makeDefault />;
+
+const Scene = () => {
+  const imageMap = useLoader(TextureLoader, "sample-panorama.jpg");
+
+  return (
+    // Setup a mesh with the panorama image applied as a texture to a sphere.
+    <mesh>
+      <sphereGeometry args={[10, 60, 20]} />
+      <meshBasicMaterial map={imageMap} side={BackSide} />
+    </mesh>
+  );
+};
+
+createRoot(document.getElementById("root")).render(
+  <Canvas>
+    <Scene />
+    // Use panorama controls.
+    <PanoramaControls makeDefault />
+  </Canvas>
+);
 ```
