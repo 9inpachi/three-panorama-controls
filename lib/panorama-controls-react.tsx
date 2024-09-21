@@ -7,12 +7,16 @@ export type PanoramaControlsProps = {
   makeDefault?: boolean;
   enabled?: boolean;
   zoomable?: boolean;
+  minFov?: number;
+  maxFov?: number;
+  zoomSpeed?: number;
+  panSpeed?: number;
 };
 
 export const PanoramaControls = forwardRef<
   PanoramaControlsImpl,
   PanoramaControlsProps
->(({ makeDefault, enabled = true, zoomable = true }, ref) => {
+>(({ makeDefault, ...options }, ref) => {
   const { camera, gl, events, set, get } = useThree();
   const domElement = events.connected ?? gl.domElement;
 
@@ -25,8 +29,22 @@ export const PanoramaControls = forwardRef<
     [camera]
   );
 
+  const {
+    enabled = true,
+    zoomable = true,
+    minFov = 10,
+    maxFov = 90,
+    zoomSpeed = 0.05,
+    panSpeed = 0.1,
+  } = options;
+
+  // React to updates to the configuration options.
   useEffect(() => void (controls.enabled = enabled), [controls, enabled]);
   useEffect(() => void (controls.zoomable = zoomable), [controls, zoomable]);
+  useEffect(() => void (controls.minFov = minFov), [controls, minFov]);
+  useEffect(() => void (controls.maxFov = maxFov), [controls, maxFov]);
+  useEffect(() => void (controls.zoomSpeed = zoomSpeed), [controls, zoomSpeed]);
+  useEffect(() => void (controls.panSpeed = panSpeed), [controls, panSpeed]);
 
   useEffect(() => {
     // This needs to be in a `useEffect` because the
