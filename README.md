@@ -17,6 +17,7 @@ Demo: <https://ps3fsk.csb.app>
 - [Usage](#usage)
   - [Vanilla](#vanilla)
   - [React Three Fiber](#react-three-fiber)
+- [Configuration](#configuration)
 
 ## Setup
 
@@ -103,4 +104,43 @@ createRoot(document.getElementById("root")).render(
     <PanoramaControls makeDefault />
   </Canvas>
 );
+```
+
+## Configuration
+
+The controls can be configured by setting the following properties.
+
+| Option              | Default | Description                                                             |
+| ------------------- | ------- | ----------------------------------------------------------------------- |
+| `enabled: boolean`  | true    | Enable or disable the controls.                                         |
+| `zoomable: boolean` | true    | Whether the user can zoom or not.                                       |
+| `minFov: number`    | 10      | The minimum field of view (FOV). Limits how much the user can zoom in.  |
+| `maxFov: number`    | 90      | The maximum field of view (FOV). Limits how much the user can zoom out. |
+| `zoomSpeed: number` | 0.05    | Sets the speed of zooming.                                              |
+| `panSpeed: number`  | 0.1     | Sets the speed of panning (moving the view).                            |
+
+Configuring in Vanilla.
+
+```js
+const panoramaControls = new PanoramaControls(camera, renderer.domElement);
+panoramaControls.enabled = true;
+panoramaControls.zoomable = true;
+panoramaControls.minFov = 20;
+panoramaControls.maxFov = 80;
+panoramaControls.zoomSpeed = 0.025;
+panoramaControls.panSpeed = 0.05;
+```
+
+Configuring in React Three Fiber.
+
+```jsx
+<PanoramaControls
+  makeDefault
+  enabled
+  zoomable
+  minFov={20}
+  maxFov={80}
+  zoomSpeed={0.025}
+  panSpeed={0.05}
+/>
 ```
