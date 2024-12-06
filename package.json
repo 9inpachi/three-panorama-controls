@@ -56,15 +56,15 @@
     "three": ">= 0.160"
   },
   "devDependencies": {
-    "@eslint/js": "^9.10.0",
-    "@react-three/fiber": "^8.17.6",
-    "@types/react": "^18.3.5",
+    "@eslint/js": "^9.16.0",
+    "@react-three/fiber": "^8.17.10",
+    "@types/react": "^18.3.14",
     "@types/three": "^0.168.0",
-    "eslint": "^9.10.0",
-    "globals": "^15.9.0",
-    "release-it": "^17.6.0",
-    "typescript": "^5.5.4",
-    "typescript-eslint": "^8.4.0"
+    "eslint": "^9.16.0",
+    "globals": "^15.13.0",
+    "release-it": "^17.10.0",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.17.0"
   },
   "peerDependenciesMeta": {
     "react": {
