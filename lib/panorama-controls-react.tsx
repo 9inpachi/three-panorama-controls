@@ -1,7 +1,15 @@
-import { useFrame, useThree } from "@react-three/fiber";
+import { useFrame, useThree, ThreeElements } from "@react-three/fiber";
 import { forwardRef, useEffect, useMemo } from "react";
 import { PerspectiveCamera } from "three";
 import { PanoramaControls as PanoramaControlsImpl } from "./panorama-controls";
+
+declare global {
+  namespace React {
+    namespace JSX {
+      interface IntrinsicElements extends ThreeElements {}
+    }
+  }
+}
 
 export type PanoramaControlsProps = {
   makeDefault?: boolean;
@@ -25,7 +33,6 @@ export const PanoramaControls = forwardRef<
   // through a ref.
   const controls = useMemo(
     () => new PanoramaControlsImpl(camera as PerspectiveCamera, domElement),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [camera]
   );
 
