@@ -54,12 +54,11 @@ document.body.appendChild(renderer.domElement);
 
 // Setup a mesh with the panorama image applied as a texture to a sphere.
 const sphere = new THREE.SphereGeometry(10, 60, 20);
+// Invert the geometry on the x-axis so that all of the faces point inward.
+sphere.scale(-1, 1, 1);
 const texture = new THREE.TextureLoader().load("./path/to/panorama/image.png");
 texture.colorSpace = THREE.SRGBColorSpace;
-const material = new THREE.MeshBasicMaterial({
-  side: THREE.BackSide,
-  map: texture,
-});
+const material = new THREE.MeshBasicMaterial({ map: texture });
 const mesh = new THREE.Mesh(sphere, material);
 scene.add(mesh);
 
@@ -90,7 +89,8 @@ const Scene = () => {
 
   return (
     // Setup a mesh with the panorama image applied as a texture to a sphere.
-    <mesh>
+    // And invert the mesh on the x-axis to avoid mirroring the image.
+    <mesh scale={[-1, 1, 1]}>
       <sphereGeometry args={[10, 60, 20]} />
       <meshBasicMaterial map={imageMap} side={BackSide} />
     </mesh>
@@ -126,7 +126,7 @@ const panoramaControls = new PanoramaControls(camera, renderer.domElement);
 panoramaControls.enabled = true;
 panoramaControls.zoomable = true;
 panoramaControls.minFov = 20;
-panoramaControls.maxFov = 80;
+panoramaControls.maxFov = 75;
 panoramaControls.zoomSpeed = 0.025;
 panoramaControls.panSpeed = 0.05;
 ```
@@ -139,7 +139,7 @@ Setting the options in React Three Fiber.
   enabled
   zoomable
   minFov={20}
-  maxFov={80}
+  maxFov={75}
   zoomSpeed={0.025}
   panSpeed={0.05}
 />

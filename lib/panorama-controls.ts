@@ -11,7 +11,7 @@ export class PanoramaControls extends EventDispatcher<PanoramaEvents> {
   public zoomable = true;
 
   public minFov = 10;
-  public maxFov = 90;
+  public maxFov = 80;
   private defaultFov = 50;
 
   public zoomSpeed = 0.05;

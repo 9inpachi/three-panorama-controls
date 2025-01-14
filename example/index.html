@@ -39,15 +39,16 @@
       renderer.setSize(window.innerWidth, window.innerHeight);
       document.body.appendChild(renderer.domElement);
 
+      // Setup a mesh with the panorama image applied as a texture to a sphere.
       const sphere = new THREE.SphereGeometry(10, 60, 20);
+      // Invert the geometry on the x-axis so that all of the faces
+      // point inward.
+      sphere.scale(-1, 1, 1);
       const texture = new THREE.TextureLoader().load(
         "./assets/sample-panorama.jpg"
       );
       texture.colorSpace = THREE.SRGBColorSpace;
-      const material = new THREE.MeshBasicMaterial({
-        side: THREE.BackSide,
-        map: texture,
-      });
+      const material = new THREE.MeshBasicMaterial({ map: texture });
       const mesh = new THREE.Mesh(sphere, material);
       scene.add(mesh);
 
