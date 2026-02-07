@@ -66,5 +66,4 @@ jobs:
         if: "${{ inputs.prerelease != 'no' && inputs.prerelease != '' }}"
         run: pnpm release ${{ inputs.increment }} --preRelease ${{ inputs.prerelease }}
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
