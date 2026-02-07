@@ -29,6 +29,8 @@ jobs:
 
     permissions:
       contents: write
+      # Required for OIDC for trusted publishing to npm.
+      id-token: write
 
     steps:
       - uses: actions/checkout@v4
@@ -58,7 +60,6 @@ jobs:
         if: "${{ inputs.prerelease == 'no' || inputs.prerelease == '' }}"
         run: pnpm release --increment ${{ inputs.increment }}
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Prepublish package
