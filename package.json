@@ -57,14 +57,14 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@react-three/fiber": "^9.5.0",
-    "@types/react": "^19.2.14",
-    "@types/three": "^0.183.1",
-    "eslint": "^10.0.3",
-    "globals": "^17.4.0",
-    "release-it": "^19.2.4",
-    "typescript": "^5.9.3",
-    "typescript-eslint": "^8.56.1"
+    "@react-three/fiber": "^9.6.1",
+    "@types/react": "^19.2.15",
+    "@types/three": "^0.184.1",
+    "eslint": "^10.4.0",
+    "globals": "^17.6.0",
+    "release-it": "^20.0.1",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.60.0"
   },
   "peerDependenciesMeta": {
     "react": {
